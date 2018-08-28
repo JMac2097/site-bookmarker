@@ -39,6 +39,8 @@ function saveBookmark(e) {
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     };
 
+    fetchBookmarks();
+
     // prevent form submission
     e.preventDefault();
 };
@@ -54,18 +56,19 @@ function fetchBookmarks() {
 
 
     for(var i = 0; i < bookmarks.length; i++) {
-
-        bookmarkList.innerHTML = `
-        <h3>${bookmarks[i].name}</h3>
-        <p>${bookmarks[i].url}</p>
+        var name = bookmarks[i].name;
+        var url = bookmarks[i].url;
+        // Find a better way of doing the "https" bit :) Currently 
+        // works with no https in the original URL from the array
+        bookmarkList.innerHTML += `
+        <h3>${name}</h3>
+        <p>${url}</p>
+        <a href="https://${url}" class="btn">Visit</a>  
+        <button onClick="remove()" class="btn">Remove</button>
         `
-    };
+    };    
+};
 
-
-    // bookmarkList.innerHTML = `
-    // <h3>${bookmarks.name}</h3>
-    // <p> ${bookmarks.url} </p>   
-    // `
-    
-    
-}
+function remove() {
+    console.log('remove it now!!!');
+};
