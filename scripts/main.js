@@ -10,8 +10,11 @@ function saveBookmark(e) {
     var siteName = document.getElementById('siteName').value;
     var siteUrl = document.getElementById('siteUrl').value;
 
-    // console.log(siteName);
-    // console.log(siteUrl);
+    // add in https 
+    if(!siteUrl.indexOf('https://')) {
+        
+        siteUrl = 'https://' + siteUrl;
+    }
 
     var bookmark = {
         name: siteName,
@@ -47,23 +50,19 @@ function saveBookmark(e) {
 
 function fetchBookmarks() {
 
-    var name, url;
+    var name, url, bookmarks;
     var bookmarkList = document.getElementById('bookmarksResults');
+    
+    for(var i = 0; i < localStorage.length; i++) {
+        // get bookmarks from localstorage
+        bookmarks = JSON.parse(localStorage.getItem('bookmarks')),
+        name = bookmarks[i].name,
+        url = bookmarks[i].url;
 
-    // get bookmarks from localstorage
-    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    console.log('loaded');
-
-
-    for(var i = 0; i < bookmarks.length; i++) {
-        var name = bookmarks[i].name;
-        var url = bookmarks[i].url;
-        // Find a better way of doing the "https" bit :) Currently 
-        // works with no https in the original URL from the array
         bookmarkList.innerHTML += `
         <h3>${name}</h3>
         <p>${url}</p>
-        <a href="https://${url}" class="btn">Visit</a>  
+        <a href="https://${url}" target="_blank" class="btn">Visit</a>  
         <button onClick="remove()" class="btn">Remove</button>
         `
     };    
