@@ -47,4 +47,20 @@ function fetchBookmarks() {
     // get bookmarks from localstorage
     var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
     console.log('loaded');
+
+    for(var i = 0; i <= bookmarks.length; i++) {
+        var name = bookmarks[i].name;
+        var url = bookmarks[i].url;
+        console.log(name);
+        console.log(url);
+    };
+
+    var bookmarkList = document.getElementById('bookmarksResults');
+
+    // bookmarkList.innerHTML = `
+    // <h3>${bookmarks.name}</h3>
+    // <p> ${bookmarks.url} </p>   
+    // `
+    
+    
 }
