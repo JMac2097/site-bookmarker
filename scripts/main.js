@@ -44,18 +44,23 @@ function saveBookmark(e) {
 };
 
 function fetchBookmarks() {
+
+    var name, url;
+    var bookmarkList = document.getElementById('bookmarksResults');
+
     // get bookmarks from localstorage
     var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
     console.log('loaded');
 
-    for(var i = 0; i <= bookmarks.length; i++) {
-        var name = bookmarks[i].name;
-        var url = bookmarks[i].url;
-        console.log(name);
-        console.log(url);
+
+    for(var i = 0; i < bookmarks.length; i++) {
+
+        bookmarkList.innerHTML = `
+        <h3>${bookmarks[i].name}</h3>
+        <p>${bookmarks[i].url}</p>
+        `
     };
 
-    var bookmarkList = document.getElementById('bookmarksResults');
 
     // bookmarkList.innerHTML = `
     // <h3>${bookmarks.name}</h3>
